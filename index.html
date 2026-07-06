@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Sistema de controle de estoque doméstico com sincronização GitHub">
+    <meta name="theme-color" content="#007AFF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Estoque">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- Ícone para iOS -->
+    <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png">
+    <link rel="shortcut icon" href="./assets/icons/favicon.ico">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <title>Controle de Estoque</title>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">📦</div>
+            <h1>Estoque</h1>
+            <p>Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Container Principal -->
+    <div id="app" class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">Estoque</h1>
+                <div class="header-actions">
+                    <button class="btn-icon" id="btn-search" title="Buscar">
+                        <span>🔍</span>
+                    </button>
+                    <button class="btn-icon" id="btn-theme" title="Tema">
+                        <span>🌙</span>
+                    </button>
+                    <button class="btn-icon" id="btn-menu" title="Menu">
+                        <span>⚙️</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Barra de Pesquisa -->
+        <div id="search-bar" class="search-bar hidden">
+            <input type="text" id="search-input" class="search-input" placeholder="Buscar produtos...">
+            <div class="search-filters">
+                <select id="filter-category" class="filter-select">
+                    <option value="">Todas as categorias</option>
+                </select>
+                <select id="filter-location" class="filter-select">
+                    <option value="">Todos os locais</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Menu Lateral -->
+        <nav id="sidebar-menu" class="sidebar-menu hidden">
+            <div class="menu-header">
+                <h2>Menu</h2>
+                <button class="btn-close" id="btn-close-menu">✕</button>
+            </div>
+            <div class="menu-content">
+                <a href="#" class="menu-item" data-view="dashboard">
+                    <span class="menu-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item" data-view="inventory">
+                    <span class="menu-icon">📦</span>
+                    <span>Estoque</span>
+                </a>
+                <a href="#" class="menu-item" data-view="shopping-list">
+                    <span class="menu-icon">🛒</span>
+                    <span>Lista de Compras</span>
+                </a>
+                <a href="#" class="menu-item" data-view="history">
+                    <span class="menu-icon">📜</span>
+                    <span>Histórico</span>
+                </a>
+                <hr class="menu-divider">
+                <a href="#" class="menu-item" data-view="settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Configurações</span>
+                </a>
+                <a href="#" class="menu-item" id="btn-export">
+                    <span class="menu-icon">📤</span>
+                    <span>Exportar JSON</span>
+                </a>
+                <a href="#" class="menu-item" id="btn-import">
+                    <span class="menu-icon">📥</span>
+                    <span>Importar JSON</span>
+                </a>
+                <a href="#" class="menu-item" id="btn-sync">
+                    <span class="menu-icon">🔄</span>
+                    <span>Sincronizar</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Overlay para Menu -->
+        <div id="menu-overlay" class="menu-overlay hidden"></div>
+
+        <!-- Conteúdo Principal -->
+        <main id="main-content" class="main-content">
+            <!-- Dashboard -->
+            <section id="view-dashboard" class="view active">
+                <div class="container">
+                    <!-- Status Cards -->
+                    <div class="status-grid">
+                        <div class="status-card total">
+                            <div class="status-icon">📦</div>
+                            <div class="status-info">
+                                <span class="status-label">Total</span>
+                                <span class="status-value" id="total-products">0</span>
+                            </div>
+                        </div>
+                        <div class="status-card expiring">
+                            <div class="status-icon">⏰</div>
+                            <div class="status-info">
+                                <span class="status-label">Próximo de Vencer</span>
+                                <span class="status-value" id="expiring-products">0</span>
+                            </div>
+                        </div>
+                        <div class="status-card expired">
+                            <div class="status-icon">🚫</div>
+                            <div class="status-info">
+                                <span class="status-label">Vencidos</span>
+                                <span class="status-value" id="expired-products">0</span>
+                            </div>
+                        </div>
+                        <div class="status-card missing">
+                            <div class="status-icon">❌</div>
+                            <div class="status-info">
+                                <span class="status-label">Em Falta</span>
+                                <span class="status-value" id="missing-products">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alertas -->
+                    <div id="alerts-section" class="alerts-section hidden">
+                        <h2 class="section-title">⚠️ Alertas</h2>
+                        <div id="alerts-container" class="alerts-list"></div>
+                    </div>
+
+                    <!-- Produtos Próximos do Vencimento -->
+                    <div id="expiring-section" class="products-section hidden">
+                        <h2 class="section-title">⏰ Próximos do Vencimento</h2>
+                        <div id="expiring-list" class="products-list"></div>
+                    </div>
+
+                    <!-- Produtos Vencidos -->
+                    <div id="expired-section" class="products-section hidden">
+                        <h2 class="section-title">🚫 Produtos Vencidos</h2>
+                        <div id="expired-list" class="products-list"></div>
+                    </div>
+
+                    <!-- Atalhos Rápidos -->
+                    <div class="quick-actions">
+                        <h2 class="section-title">Ações Rápidas</h2>
+                        <div class="quick-actions-grid">
+                            <button class="quick-action-btn" id="btn-new-product">
+                                <span class="quick-action-icon">➕</span>
+                                <span>Novo Produto</span>
+                            </button>
+                            <button class="quick-action-btn" id="btn-scan-barcode">
+                                <span class="quick-action-icon">📱</span>
+                                <span>Escanear Código</span>
+                            </button>
+                            <button class="quick-action-btn" id="btn-shopping-list">
+                                <span class="quick-action-icon">🛒</span>
+                                <span>Lista de Compras</span>
+                            </button>
+                            <button class="quick-action-btn" id="btn-consumption">
+                                <span class="quick-action-icon">✅</span>
+                                <span>Consumir</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Estoque -->
+            <section id="view-inventory" class="view">
+                <div class="container">
+                    <div class="view-header">
+                        <h2>Meu Estoque</h2>
+                        <button class="btn-primary" id="btn-add-product">+ Novo Produto</button>
+                    </div>
+                    <div id="inventory-list" class="products-list"></div>
+                </div>
+            </section>
+
+            <!-- Lista de Compras -->
+            <section id="view-shopping-list" class="view">
+                <div class="container">
+                    <h2>Lista de Compras</h2>
+                    <div id="shopping-list" class="shopping-list"></div>
+                </div>
+            </section>
+
+            <!-- Histórico -->
+            <section id="view-history" class="view">
+                <div class="container">
+                    <h2>Histórico</h2>
+                    <div class="history-filters">
+                        <input type="date" id="filter-date-start" class="filter-input">
+                        <span>até</span>
+                        <input type="date" id="filter-date-end" class="filter-input">
+                        <select id="filter-history-type" class="filter-select">
+                            <option value="">Todos os tipos</option>
+                            <option value="entrada">Entrada</option>
+                            <option value="saída">Saída</option>
+                            <option value="correção">Correção</option>
+                        </select>
+                    </div>
+                    <div id="history-list" class="history-list"></div>
+                </div>
+            </section>
+
+            <!-- Configurações -->
+            <section id="view-settings" class="view">
+                <div class="container">
+                    <h2>Configurações</h2>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label>Token GitHub</label>
+                            <input type="password" id="setting-github-token" class="form-input" placeholder="Seu token">
+                            <small>Cole aqui seu Personal Access Token do GitHub</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Usuário GitHub</label>
+                            <input type="text" id="setting-github-user" class="form-input" placeholder="Seu usuário">
+                        </div>
+                        <div class="form-group">
+                            <label>Repositório</label>
+                            <input type="text" id="setting-github-repo" class="form-input" placeholder="Nome do repositório">
+                        </div>
+                        <button class="btn-primary" id="btn-save-settings">Salvar Configurações</button>
+                        <button class="btn-secondary" id="btn-test-connection">Testar Conexão</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FAB (Floating Action Button) -->
+        <button class="fab" id="fab-menu" title="Adicionar">
+            <span>➕</span>
+        </button>
+    </div>
+
+    <!-- Modal de Produto -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Novo Produto</h2>
+                <button class="btn-close" id="btn-close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="product-form" class="product-form">
+                    <div class="form-group">
+                        <label>Nome *</label>
+                        <input type="text" name="name" class="form-input" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <select name="category" class="form-select"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Marca</label>
+                            <input type="text" name="brand" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Quantidade *</label>
+                            <input type="number" name="quantity" class="form-input" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Unidade</label>
+                            <select name="unit" class="form-select">
+                                <option value="un">Unidade</option>
+                                <option value="l">Litro</option>
+                                <option value="ml">Mililitro</option>
+                                <option value="kg">Quilograma</option>
+                                <option value="g">Grama</option>
+                                <option value="caixa">Caixa</option>
+                                <option value="dúzia">Dúzia</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Local de Armazenamento</label>
+                        <select name="location" class="form-select"></select>
+                    </div>
+
+                    <div id="validity-section" class="validity-section">
+                        <label>Datas de Validade</label>
+                        <div id="validity-items" class="validity-items"></div>
+                        <button type="button" class="btn-secondary btn-sm" id="btn-add-validity">+ Adicionar Validade</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea name="notes" class="form-textarea"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Código de Barras</label>
+                        <div class="barcode-input-group">
+                            <input type="text" name="barcode" class="form-input">
+                            <button type="button" class="btn-secondary btn-sm" id="btn-scan">📱 Escanear</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto</label>
+                        <input type="file" name="photo" class="form-input" accept="image/*">
+                        <div id="photo-preview" class="photo-preview"></div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="btn-cancel-form">Cancelar</button>
+                        <button type="submit" class="btn-primary">Salvar Produto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Consumo -->
+    <div id="consumption-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Consumo</h2>
+                <button class="btn-close" id="btn-close-consumption">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="consumption-form" class="consumption-form">
+                    <div class="form-group">
+                        <label>Produto</label>
+                        <select id="consumption-product" class="form-select" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantidade</label>
+                        <input type="number" id="consumption-quantity" class="form-input" min="1" value="1" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary">Cancelar</button>
+                        <button type="submit" class="btn-primary">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="./js/utils.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/github-api.js"></script>
+    <script src="./js/database.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+
+    <script>
+        // Registrar Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js').catch(err => {
+                console.error('Erro ao registrar Service Worker:', err);
+            });
+        }
+    </script>
+</body>
+</html>
