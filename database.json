@@ -2,7 +2,7 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-06T16:29:29.980Z"
+    "lastSync": "2026-07-06T16:29:51.893Z"
   },
   "products": [
     {
@@ -23,21 +23,6 @@
       "updatedAt": "2026-07-06T15:12:15.285Z"
     },
     {
-      "id": "1783352309030-pryq9mpds",
-      "name": "Teste 1",
-      "category": "",
-      "brand": "",
-      "quantity": 4,
-      "unit": "un",
-      "location": "",
-      "validities": [],
-      "notes": "",
-      "barcode": "",
-      "photo": null,
-      "createdAt": "2026-07-06T15:38:29.030Z",
-      "updatedAt": "2026-07-06T16:26:29.154Z"
-    },
-    {
       "id": "1783355361547-vwwsy9v8t",
       "name": "IOGURTE GREGO",
       "category": "",
@@ -54,6 +39,24 @@
       "photo": null,
       "createdAt": "2026-07-06T16:29:21.547Z",
       "updatedAt": "2026-07-06T16:29:21.547Z"
+    },
+    {
+      "id": "1783355391892-nskdbyy5f",
+      "name": "IOGURTE GREGO",
+      "category": "",
+      "brand": "",
+      "quantity": 2,
+      "unit": "un",
+      "location": "",
+      "validities": [
+        "2026-07-10",
+        "2026-07-10"
+      ],
+      "notes": "",
+      "barcode": "",
+      "photo": null,
+      "createdAt": "2026-07-06T16:29:51.892Z",
+      "updatedAt": "2026-07-06T16:29:51.892Z"
     }
   ],
   "history": [
@@ -156,11 +159,31 @@
       "timestamp": "2026-07-06T16:29:29.978Z",
       "date": "06/07/2026",
       "time": "13:29"
+    },
+    {
+      "id": "1783355372689-pbybc5d1r",
+      "type": "saída",
+      "productName": "Teste 1",
+      "quantity": 4,
+      "notes": "",
+      "timestamp": "2026-07-06T16:29:32.689Z",
+      "date": "06/07/2026",
+      "time": "13:29"
+    },
+    {
+      "id": "1783355391892-fm5tdnpiv",
+      "type": "entrada",
+      "productName": "IOGURTE GREGO",
+      "quantity": 2,
+      "notes": "",
+      "timestamp": "2026-07-06T16:29:51.892Z",
+      "date": "06/07/2026",
+      "time": "13:29"
     }
   ],
   "shoppingList": [],
   "statistics": {
-    "totalConsumed": 6,
+    "totalConsumed": 10,
     "lastUpdated": "2026-07-06T14:20:40.827Z"
   }
 }
