@@ -124,12 +124,23 @@ class GitHubAPI {
             );
 
             if (response.status === 404) {
+                console.log('Arquivo não existe no repositório');
                 return null; // Arquivo não existe
             }
 
-            if (!response.ok) throw new Error(`Erro ao obter SHA: ${response.status}`);
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                console.error('Erro ao obter SHA:', response.status, error);
+                throw new Error(`Erro ao obter SHA: ${response.status}`);
+            }
             
             const data = await response.json();
+            if (!data.sha) {
+                console.error('SHA não encontrado na resposta:', data);
+                throw new Error('SHA não retornado pela API');
+            }
+            
+            console.log('SHA obtido:', data.sha);
             return data.sha;
         } catch (error) {
             if (error.message.includes('404')) {
