@@ -117,6 +117,8 @@ small {
     padding-top: max(var(--spacing-md), env(safe-area-inset-top));
     box-shadow: var(--shadow-sm);
     flex-shrink: 0;
+    position: relative;
+    z-index: 3000;
 }
 
 .header-content {
@@ -280,6 +282,7 @@ button {
     flex-direction: column;
     transform: translateX(-100%);
     transition: transform var(--transition-base);
+    overflow-y: auto;
 }
 
 .sidebar-menu:not(.hidden) {
@@ -287,7 +290,8 @@ button {
 }
 
 .sidebar-menu.hidden {
-    display: none;
+    /* Não usar display: none para permitir animação com transform */
+    pointer-events: none;
 }
 
 .menu-header {
