@@ -124,64 +124,28 @@ class GitHubAPI {
             );
 
             if (response.status === 404) {
-                console.log('Arquivo não existe no repositório');
-                return null; // Arquivo não existe
+                console.log('Arquivo não existe - será criado novo');
+                return null;
             }
 
             if (!response.ok) {
-                const error = await response.json().catch(() => ({}));
-                console.error('Erro ao obter SHA:', response.status, error);
-                throw new Error(`Erro ao obter SHA: ${response.status}`);
+                console.error(`Erro HTTP ${response.status}`);
+                return null;
             }
             
             const data = await response.json();
             
-            // Se tem SHA, retorna
+            // Se tem SHA direto
             if (data.sha) {
                 console.log('SHA obtido:', data.sha);
                 return data.sha;
             }
             
-            // Se tem content (base64), calcula SHA do conteúdo
-            if (data.content) {
-                console.log('SHA não direto, calculando do conteúdo...');
-                const sha = await this.calculateSha(data.content);
-                console.log('SHA calculado:', sha);
-                return sha;
-            }
-            
-            console.error('Não conseguiu obter SHA:', data);
-            throw new Error('SHA não retornado pela API');
+            console.log('Resposta não tinha SHA', data);
+            return null;
         } catch (error) {
-            if (error.message.includes('404')) {
-                return null;
-            }
-            console.error('Erro ao obter SHA do arquivo:', error);
-            throw error;
-        }
-    }
-
-    /**
-     * Calcula SHA1 do conteúdo base64
-     */
-    static async calculateSha(base64Content) {
-        try {
-            // Decodifica base64
-            const binaryStr = atob(base64Content);
-            const bytes = new Uint8Array(binaryStr.length);
-            for (let i = 0; i < binaryStr.length; i++) {
-                bytes[i] = binaryStr.charCodeAt(i);
-            }
-            
-            // Calcula SHA1
-            const hashBuffer = await crypto.subtle.digest('SHA-1', bytes);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const sha = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            
-            return sha;
-        } catch (error) {
-            console.error('Erro ao calcular SHA:', error);
-            throw error;
+            console.error('Erro ao obter SHA:', error.message);
+            return null;
         }
     }
 
@@ -193,7 +157,14 @@ class GitHubAPI {
             const config = this.getConfig();
             if (!config) throw new Error('Configuração não encontrada');
 
-            const sha = await this.getFileSha();
+            let sha = null;
+            try {
+                sha = await this.getFileSha();
+            } catch (error) {
+                console.log('SHA não obtido (arquivo novo ou erro):', error.message);
+                sha = null;
+            }
+
             const encodedContent = btoa(JSON.stringify(content, null, 2));
 
             const payload = {
@@ -221,10 +192,12 @@ class GitHubAPI {
 
             if (!response.ok) {
                 const error = await response.json();
+                console.error('Erro do GitHub:', error);
                 throw new Error(`Erro ao atualizar: ${error.message}`);
             }
 
             const data = await response.json();
+            console.log('Banco atualizado com sucesso!', data);
             return data;
         } catch (error) {
             console.error('Erro ao atualizar banco de dados:', error);
