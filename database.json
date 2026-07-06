@@ -2,7 +2,7 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-06T15:20:15.143Z"
+    "lastSync": "2026-07-06T15:38:29.033Z"
   },
   "products": [
     {
@@ -36,6 +36,23 @@
       "photo": null,
       "createdAt": "2026-07-06T15:12:15.285Z",
       "updatedAt": "2026-07-06T15:12:15.285Z"
+    },
+    {
+      "id": "1783352309030-pryq9mpds",
+      "name": "Teste 1",
+      "category": "",
+      "brand": "",
+      "quantity": 5,
+      "unit": "un",
+      "location": "",
+      "validities": [
+        "2026-07-09"
+      ],
+      "notes": "",
+      "barcode": "",
+      "photo": null,
+      "createdAt": "2026-07-06T15:38:29.030Z",
+      "updatedAt": "2026-07-06T15:38:29.030Z"
     }
   ],
   "history": [
@@ -98,6 +115,16 @@
       "timestamp": "2026-07-06T15:13:20.494Z",
       "date": "06/07/2026",
       "time": "12:13"
+    },
+    {
+      "id": "1783352309030-8wr4d4js3",
+      "type": "entrada",
+      "productName": "Teste 1",
+      "quantity": 5,
+      "notes": "",
+      "timestamp": "2026-07-06T15:38:29.030Z",
+      "date": "06/07/2026",
+      "time": "12:38"
     }
   ],
   "shoppingList": [],
