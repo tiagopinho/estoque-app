@@ -12,17 +12,16 @@ class Database {
      */
     static async initialize() {
         try {
-            // Tenta carregar do localStorage primeiro
-            let dbData = Storage.loadSyncData();
+            let dbData = null;
 
+            // Tenta carregar do GitHub se configurado
+            if (Storage.isConfigValid()) {
+                dbData = await GitHubAPI.pullDatabase();
+            }
+
+            // Se GitHub vazio, cria banco vazio
             if (!dbData) {
-                // Tenta carregar do GitHub
-                if (Storage.isConfigValid()) {
-                    dbData = await GitHubAPI.pullDatabase();
-                } else {
-                    // Cria banco de dados vazio
-                    dbData = this.createEmptyDatabase();
-                }
+                dbData = this.createEmptyDatabase();
             }
 
             this.data = dbData;
@@ -87,9 +86,6 @@ class Database {
             this.addToShoppingList(product);
         }
 
-        // Salva no localStorage
-        Storage.saveSyncData(this.data);
-
         return product;
     }
 
@@ -111,9 +107,6 @@ class Database {
             this.addHistory(type, product.name, Math.abs(diff));
         }
 
-        // Salva no localStorage
-        Storage.saveSyncData(this.data);
-
         return product;
     }
 
@@ -131,9 +124,6 @@ class Database {
         this.removeFromShoppingList(id);
         
         this.data.products.splice(index, 1);
-
-        // Salva no localStorage
-        Storage.saveSyncData(this.data);
 
         return true;
     }
@@ -398,11 +388,6 @@ class Database {
 
             const result = await GitHubAPI.syncChanges(this.data, commitMessage);
             
-            if (result.success) {
-                Storage.saveSyncData(this.data);
-                Storage.clearPendingChanges();
-            }
-
             return result;
         } catch (error) {
             console.error('Erro ao sincronizar:', error);

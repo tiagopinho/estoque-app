@@ -36,10 +36,8 @@ class App {
             // Esconde splash screen
             UI.hideSplashScreen();
 
-            // Sincroniza se possível (sem aguardar)
-            if (Storage.isConfigValid() && Utils.isOnline()) {
-                this.syncWithGitHubThrottled();
-            }
+            // NÃO sincroniza automaticamente na inicialização
+            // O usuário pode clicar no botão de sync manualmente se necessário
 
             console.log('Aplicação inicializada com sucesso');
         } catch (error) {
@@ -117,6 +115,12 @@ class App {
         // Configurações
         UI.elements.btnSaveSettings.addEventListener('click', () => this.saveSettings());
         UI.elements.btnTestConnection.addEventListener('click', () => this.testConnection());
+        
+        // Botão para limpar dados locais (se existir)
+        const btnClearData = document.getElementById('btn-clear-data');
+        if (btnClearData) {
+            btnClearData.addEventListener('click', () => this.clearLocalData());
+        }
 
         // Histórico
         UI.elements.filterDateStart.addEventListener('change', () => this.updateHistoryView());
@@ -461,6 +465,44 @@ class App {
             UI.elements.btnTestConnection.disabled = false;
             UI.elements.btnTestConnection.textContent = 'Testar Conexão';
             NotificationManager.showError('Erro ao testar conexão');
+        }
+    }
+
+    /**
+     * Limpa todos os dados locais
+     */
+    static async clearLocalData() {
+        const confirmed = await NotificationManager.confirm(
+            'Isso vai deletar TODOS os dados locais do navegador. Tem certeza?',
+            'Limpar dados locais'
+        );
+
+        if (!confirmed) return;
+
+        try {
+            // Limpa localStorage
+            localStorage.clear();
+            
+            // Limpa sessionStorage
+            sessionStorage.clear();
+            
+            // Limpa service worker cache
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister();
+                }
+            }
+
+            NotificationManager.showSuccess('Dados locais limpos! Recarregando...');
+            
+            // Recarrega após 1 segundo
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        } catch (error) {
+            console.error('Erro ao limpar dados:', error);
+            NotificationManager.showError('Erro ao limpar dados');
         }
     }
 

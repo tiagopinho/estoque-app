@@ -141,6 +141,11 @@ class UI {
             targetView.classList.add('active');
         }
 
+        // Atualiza dados quando muda pra estoque
+        if (viewId === 'inventory') {
+            this.updateInventory();
+        }
+
         this.closeMenu();
     }
 
@@ -174,6 +179,11 @@ class UI {
      * Abre modal de produto
      */
     static openProductModal(product = null) {
+        // Fecha qualquer modal anterior e menu
+        this.closeConsumptionModal();
+        this.closeMenu();
+        this.elements.menuOverlay.classList.add('hidden');
+        
         this.elements.modalTitle.textContent = product ? 'Editar Produto' : 'Novo Produto';
         this.elements.productModal.classList.remove('hidden');
 
@@ -192,6 +202,7 @@ class UI {
      */
     static closeProductModal() {
         this.elements.productModal.classList.add('hidden');
+        this.elements.menuOverlay.classList.add('hidden');
         this.elements.productForm.reset();
     }
 
@@ -199,6 +210,11 @@ class UI {
      * Abre modal de consumo
      */
     static openConsumptionModal() {
+        // Fecha qualquer modal anterior e menu
+        this.closeProductModal();
+        this.closeMenu();
+        this.elements.menuOverlay.classList.add('hidden');
+        
         this.elements.consumptionModal.classList.remove('hidden');
         this.updateConsumptionProductOptions();
     }
@@ -208,6 +224,7 @@ class UI {
      */
     static closeConsumptionModal() {
         this.elements.consumptionModal.classList.add('hidden');
+        this.elements.menuOverlay.classList.add('hidden');
     }
 
     /**
@@ -415,7 +432,6 @@ class UI {
 
             const productCards = products.map(product => {
                 if (!product || !product.id) {
-                    console.warn('⚠️ Produto inválido:', product);
                     return '';
                 }
 
