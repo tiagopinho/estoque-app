@@ -2,25 +2,9 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-06T15:08:21.285Z"
+    "lastSync": "2026-07-06T15:09:01.731Z"
   },
-  "products": [
-    {
-      "id": "1783350197468-9lnxyhvqh",
-      "name": "IOGURTE VIGOR",
-      "category": "",
-      "brand": "",
-      "quantity": 1,
-      "unit": "un",
-      "location": "",
-      "validities": [],
-      "notes": "",
-      "barcode": "",
-      "photo": null,
-      "createdAt": "2026-07-06T15:03:17.468Z",
-      "updatedAt": "2026-07-06T15:08:21.284Z"
-    }
-  ],
+  "products": [],
   "history": [
     {
       "id": "1783350197468-cpxyszlxs",
@@ -41,11 +25,21 @@
       "timestamp": "2026-07-06T15:08:21.284Z",
       "date": "06/07/2026",
       "time": "12:08"
+    },
+    {
+      "id": "1783350541730-x7aw3dzqr",
+      "type": "saída",
+      "productName": "IOGURTE VIGOR",
+      "quantity": 1,
+      "notes": "",
+      "timestamp": "2026-07-06T15:09:01.730Z",
+      "date": "06/07/2026",
+      "time": "12:09"
     }
   ],
   "shoppingList": [],
   "statistics": {
-    "totalConsumed": 1,
+    "totalConsumed": 2,
     "lastUpdated": "2026-07-06T14:20:40.827Z"
   }
 }
