@@ -333,7 +333,14 @@ class UI {
         products.forEach(product => {
             const option = document.createElement('option');
             option.value = product.id;
-            option.textContent = `${product.name} (${product.quantity} ${product.unit})`;
+            
+            // Pega a data de vencimento mais próxima
+            let validity = 'Sem vencimento';
+            if (product.validities && product.validities.length > 0) {
+                validity = product.validities[0];
+            }
+            
+            option.textContent = `${product.name} (${product.quantity} ${product.unit}) - ${validity}`;
             select.appendChild(option);
         });
     }
