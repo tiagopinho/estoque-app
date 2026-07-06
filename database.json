@@ -1,0 +1,108 @@
+{
+  "config": {
+    "version": "1.0.0",
+    "createdAt": "2026-07-06T14:20:40.827Z",
+    "lastSync": "2026-07-06T15:45:11.735Z"
+  },
+  "products": [
+    {
+      "id": "1783350562741-lv3s7m2s0",
+      "name": "IOGURTE GREGO",
+      "category": "",
+      "brand": "",
+      "quantity": 2,
+      "unit": "un",
+      "location": "",
+      "validities": [],
+      "notes": "",
+      "barcode": "",
+      "photo": null,
+      "createdAt": "2026-07-06T15:09:22.741Z",
+      "updatedAt": "2026-07-06T15:13:20.494Z"
+    },
+    {
+      "id": "1783350735285-yku4drtln",
+      "name": "IOGURTE GREGO",
+      "category": "",
+      "brand": "",
+      "quantity": 2,
+      "unit": "un",
+      "location": "",
+      "validities": [
+        "2026-08-25"
+      ],
+      "notes": "",
+      "barcode": "",
+      "photo": null,
+      "createdAt": "2026-07-06T15:12:15.285Z",
+      "updatedAt": "2026-07-06T15:12:15.285Z"
+    }
+  ],
+  "history": [
+    {
+      "id": "1783350197468-cpxyszlxs",
+      "type": "entrada",
+      "productName": "IOGURTE VIGOR",
+      "quantity": 2,
+      "notes": "",
+      "timestamp": "2026-07-06T15:03:17.468Z",
+      "date": "06/07/2026",
+      "time": "12:03"
+    },
+    {
+      "id": "1783350501284-pgewcpp83",
+      "type": "saída",
+      "productName": "IOGURTE VIGOR",
+      "quantity": 1,
+      "notes": "",
+      "timestamp": "2026-07-06T15:08:21.284Z",
+      "date": "06/07/2026",
+      "time": "12:08"
+    },
+    {
+      "id": "1783350541730-x7aw3dzqr",
+      "type": "saída",
+      "productName": "IOGURTE VIGOR",
+      "quantity": 1,
+      "notes": "",
+      "timestamp": "2026-07-06T15:09:01.730Z",
+      "date": "06/07/2026",
+      "time": "12:09"
+    },
+    {
+      "id": "1783350562741-8hirh0hc0",
+      "type": "entrada",
+      "productName": "IOGURTE GREGO",
+      "quantity": 3,
+      "notes": "",
+      "timestamp": "2026-07-06T15:09:22.741Z",
+      "date": "06/07/2026",
+      "time": "12:09"
+    },
+    {
+      "id": "1783350735285-v012eer31",
+      "type": "entrada",
+      "productName": "IOGURTE GREGO",
+      "quantity": 2,
+      "notes": "",
+      "timestamp": "2026-07-06T15:12:15.285Z",
+      "date": "06/07/2026",
+      "time": "12:12"
+    },
+    {
+      "id": "1783350800494-9oonygz95",
+      "type": "saída",
+      "productName": "IOGURTE GREGO",
+      "quantity": 1,
+      "notes": "",
+      "timestamp": "2026-07-06T15:13:20.494Z",
+      "date": "06/07/2026",
+      "time": "12:13"
+    }
+  ],
+  "shoppingList": [],
+  "statistics": {
+    "totalConsumed": 3,
+    "lastUpdated": "2026-07-06T14:20:40.827Z"
+  }
+}
