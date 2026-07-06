@@ -2,7 +2,7 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-06T15:11:36.654Z"
+    "lastSync": "2026-07-06T15:12:15.286Z"
   },
   "products": [
     {
@@ -21,6 +21,23 @@
       "photo": null,
       "createdAt": "2026-07-06T15:09:22.741Z",
       "updatedAt": "2026-07-06T15:09:22.741Z"
+    },
+    {
+      "id": "1783350735285-yku4drtln",
+      "name": "IOGURTE GREGO",
+      "category": "",
+      "brand": "",
+      "quantity": 2,
+      "unit": "un",
+      "location": "",
+      "validities": [
+        "2026-08-25"
+      ],
+      "notes": "",
+      "barcode": "",
+      "photo": null,
+      "createdAt": "2026-07-06T15:12:15.285Z",
+      "updatedAt": "2026-07-06T15:12:15.285Z"
     }
   ],
   "history": [
@@ -63,6 +80,16 @@
       "timestamp": "2026-07-06T15:09:22.741Z",
       "date": "06/07/2026",
       "time": "12:09"
+    },
+    {
+      "id": "1783350735285-v012eer31",
+      "type": "entrada",
+      "productName": "IOGURTE GREGO",
+      "quantity": 2,
+      "notes": "",
+      "timestamp": "2026-07-06T15:12:15.285Z",
+      "date": "06/07/2026",
+      "time": "12:12"
     }
   ],
   "shoppingList": [],
