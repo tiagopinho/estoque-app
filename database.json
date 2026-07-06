@@ -2,7 +2,7 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-06T16:30:16.077Z"
+    "lastSync": "2026-07-06T16:30:26.117Z"
   },
   "products": [
     {
@@ -10,36 +10,17 @@
       "name": "IOGURTE GREGO",
       "category": "",
       "brand": "",
-      "quantity": 2,
+      "quantity": 1,
       "unit": "un",
       "location": "",
       "validities": [
-        "2026-07-10",
         "2026-07-10"
       ],
       "notes": "",
       "barcode": "",
       "photo": null,
       "createdAt": "2026-07-06T16:29:21.547Z",
-      "updatedAt": "2026-07-06T16:29:21.547Z"
-    },
-    {
-      "id": "1783355391892-nskdbyy5f",
-      "name": "IOGURTE GREGO",
-      "category": "",
-      "brand": "",
-      "quantity": 2,
-      "unit": "un",
-      "location": "",
-      "validities": [
-        "2026-07-10",
-        "2026-07-10"
-      ],
-      "notes": "",
-      "barcode": "",
-      "photo": null,
-      "createdAt": "2026-07-06T16:29:51.892Z",
-      "updatedAt": "2026-07-06T16:29:51.892Z"
+      "updatedAt": "2026-07-06T16:30:26.115Z"
     }
   ],
   "history": [
@@ -172,11 +153,31 @@
       "timestamp": "2026-07-06T16:30:16.075Z",
       "date": "06/07/2026",
       "time": "13:30"
+    },
+    {
+      "id": "1783355417539-3s6j0cktw",
+      "type": "saída",
+      "productName": "IOGURTE GREGO",
+      "quantity": 2,
+      "notes": "",
+      "timestamp": "2026-07-06T16:30:17.539Z",
+      "date": "06/07/2026",
+      "time": "13:30"
+    },
+    {
+      "id": "1783355426115-64g48lv7i",
+      "type": "saída",
+      "productName": "IOGURTE GREGO",
+      "quantity": 1,
+      "notes": "",
+      "timestamp": "2026-07-06T16:30:26.115Z",
+      "date": "06/07/2026",
+      "time": "13:30"
     }
   ],
   "shoppingList": [],
   "statistics": {
-    "totalConsumed": 12,
+    "totalConsumed": 15,
     "lastUpdated": "2026-07-06T14:20:40.827Z"
   }
 }
