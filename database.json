@@ -2,29 +2,9 @@
   "config": {
     "version": "1.0.0",
     "createdAt": "2026-07-06T14:20:40.827Z",
-    "lastSync": "2026-07-07T12:26:07.717Z"
+    "lastSync": "2026-07-07T12:34:11.352Z"
   },
-  "products": [
-    {
-      "id": "1783427149205-80fic757m",
-      "name": "IOGUETE VIGOR",
-      "category": "",
-      "brand": "",
-      "quantity": 3,
-      "unit": "un",
-      "location": "",
-      "validities": [
-        "2026-07-10",
-        "2026-07-10",
-        "2026-07-10"
-      ],
-      "notes": "",
-      "barcode": "",
-      "photo": null,
-      "createdAt": "2026-07-07T12:25:49.205Z",
-      "updatedAt": "2026-07-07T12:26:07.717Z"
-    }
-  ],
+  "products": [],
   "history": [
     {
       "id": "1783350197468-cpxyszlxs",
@@ -275,11 +255,21 @@
       "timestamp": "2026-07-07T12:26:07.717Z",
       "date": "07/07/2026",
       "time": "09:26"
+    },
+    {
+      "id": "1783427651324-ppd0d4kky",
+      "type": "saída",
+      "productName": "IOGUETE VIGOR",
+      "quantity": 3,
+      "notes": "",
+      "timestamp": "2026-07-07T12:34:11.324Z",
+      "date": "07/07/2026",
+      "time": "09:34"
     }
   ],
   "shoppingList": [],
   "statistics": {
-    "totalConsumed": 26,
+    "totalConsumed": 29,
     "lastUpdated": "2026-07-06T14:20:40.827Z"
   }
 }
